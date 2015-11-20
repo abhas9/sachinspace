@@ -66,9 +66,9 @@ gulp.task('browserify', () => {
   .bundle()
   .pipe(source(paths.bundle))
   .pipe(buffer())
-  .pipe(sourcemaps.init())
-  .pipe(uglify())
-  .pipe(sourcemaps.write('.'))
+  // .pipe(sourcemaps.init())
+  // .pipe(uglify())
+  // .pipe(sourcemaps.write('.'))
   .pipe(gulp.dest(paths.distJs));
 });
 
