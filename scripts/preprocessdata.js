@@ -6514,15 +6514,13 @@ for (var i = 0; i < rawData.length; i++) {
          rawData[i].batting_score = parseInt(rawData[i].batting_score, 10);
     }
 
-    if (rawData[i].result_margin === "-") {
-        delete rawData[i].result_margin;
-    } else if(rawData[i].result_margin.indexOf("runs") >= 0){
-        rawData[i].result_margin = parseInt(rawData[i].result_margin.replace("runs",""), 10);
-        rawData[i].result_margin_type = "runs";
+    if(rawData[i].result_margin.indexOf("runs") >= 0){
+        rawData[i].result_margin_runs = parseInt(rawData[i].result_margin.replace("runs",""), 10);
     } else if(rawData[i].result_margin.indexOf("wickets") >= 0){
-        rawData[i].result_margin = parseInt(rawData[i].result_margin.replace("wickets",""), 10);
-        rawData[i].result_margin_type = "wickets";
+        rawData[i].result_margin_wickets = parseInt(rawData[i].result_margin.replace("wickets",""), 10);
     } 
+
+    delete rawData[i].result_margin;
 
     rawData[i].opposition = rawData[i].opposition.substring(2);
 }
