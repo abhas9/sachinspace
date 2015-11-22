@@ -21,7 +21,6 @@ export default React.createClass({
             let filterEventDetailsObj = this.filterEventDetails([this.min, this.max], !this.props.optional);
             let event = new CustomEvent('filterChange', filterEventDetailsObj);
             document.dispatchEvent(event);
-            debugger;
             return {
                 start: [this.timestamp(this.min), this.timestamp(this.max)],
                 disabled: this.props.optional
@@ -36,7 +35,6 @@ export default React.createClass({
         },
 
         rangeChangeHandler(start) {
-            debugger;
             start = start.map(s => parseInt(s));
             this.setState({
                 start
@@ -101,7 +99,6 @@ export default React.createClass({
                 var time = month + ', ' + year;
                 return time;
             }
-            debugger;
             return (
                 <div>
                     {filterSwitch}
