@@ -3,7 +3,7 @@ import masterdata from '../store/masterdata.js';
 import resultsConfig from '../config/results.js';
 import _ from 'lodash';
 import Cards from './Cards.js';
-
+import Visualization from './Visualization.js';
 
 export default React.createClass({
     getInitialState() {
@@ -113,8 +113,10 @@ export default React.createClass({
                         <h4>Summary</h4>
                         <Cards data = {summary} />
                         <hr />
+                        <Visualization data = {data} id = 'summary-chart'/>
                         <h4>Search Results</h4>
                         <Cards data = {data} />
+
 		      		</div>
 	  			</div>
   			</div>

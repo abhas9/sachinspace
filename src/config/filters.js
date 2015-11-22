@@ -48,6 +48,11 @@ export default [{
     title: 'Result margin (runs)',
     type: 'range',
     optional: true
+}, {
+    key: 'batting_innings',
+    title: 'Batting Innings',
+    type: 'multiselect',
+    optional: true
 } /*,{
     key: 'not_out',
     title: 'Not Out',

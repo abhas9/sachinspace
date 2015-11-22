@@ -71,7 +71,7 @@ export default React.createClass({
             let style = {
                 display: (this.state.disabled) ? 'none' : 'block',
             };
-            let labelClass = (this.props.title.indexOf(' ') > 0) ? ' small-label' : ''; 
+            let labelClass = (this.props.title.split(' ').length > 3) ? ' small-label' : ''; 
             if (this.props.optional) {
                 filterSwitchAndLabel =
                     <div className = 'checkbox-wrp'>

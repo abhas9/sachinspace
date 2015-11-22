@@ -1,6 +1,7 @@
 body {
-	overflow: hidden; 
+    overflow: hidden;
 }
+
 input[type=checkbox] {
     position: absolute;
     z-index: -1000;
@@ -27,7 +28,7 @@ input[type=checkbox] + label.checkbox-label {
 }
 
 input[type=checkbox] + label.checkbox-label.small-label {
-	font-size: 11px;
+    font-size: 11px;
     line-height: 11px;
 }
 
@@ -62,44 +63,76 @@ label.small-label {
 }
 
 .filter-wrp {
-	margin-top: 10px;
+    margin-top: 10px;
 }
 
 .filters-wrp {
-	width: 25%;
-	position: absolute;
-	top:0%;
-	bottom: 0%;
-	overflow-y: auto;
-	background: #F9F9F9;
-	border-right: 1px solid #EEE;
-	padding: 5px 15px;
-	left: 0px;
+    width: 25%;
+    position: absolute;
+    top: 0%;
+    bottom: 0%;
+    overflow-y: auto;
+    background: #F9F9F9;
+    border-right: 1px solid #EEE;
+    padding: 5px 15px;
+    left: 0px;
 }
+
 .results-wrp {
-	left:26%;
-	right:0%;
-	top:0%;
-	bottom: 0%;
-	padding: 5px 25px;
-	position: absolute;
-	overflow-y: auto; 
+    left: 26%;
+    right: 0%;
+    top: 0%;
+    bottom: 0%;
+    padding: 5px 25px;
+    position: absolute;
+    overflow-y: auto;
 }
+
 button {
-	background: #fff;
+    background: #fff;
 }
+
 .view-buttons-wrp {
-	position: fixed;
-	top: 0px;
-	padding: 5px;
-	left: 28%;
-	background: #fff;
-	overflow: hidden;
-	z-index:2;
+    position: fixed;
+    top: 0px;
+    padding: 5px;
+    left: 28%;
+    background: #fff;
+    overflow: hidden;
+    z-index: 2;
 }
+
 .results-visualization-wrp {
-	margin-top: 50px;
+    margin-top: 50px;
 }
-.card table.values td, .card table.summary-table td{
-	text-transform: capitalize;
+
+.card table.values td, .card table.summary-table td {
+    text-transform: capitalize;
+}
+
+.range-input {
+    -webkit-appearance: none;
+    background-color: red;
+    width: 100%;
+    height: 2px;
+}
+
+.range-input:focus {
+    outline: none;
+}
+
+.range-input-wrp {
+    width: 90%;
+    margin: 5px auto;
+}
+
+input[type=range]::-webkit-slider-thumb {
+	appearance: none;
+	-webkit-appearance: none;
+	-moz-appearance: none;
+	background-color: #fff;
+	border: 1px solid #333;
+	width: 14px;
+	height: 14px;
+	border-radius: 15px;
 }

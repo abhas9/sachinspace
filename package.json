@@ -28,7 +28,8 @@
     "lodash": "~3.10.1",
     "react-select": "~1.0.0-beta5",
     "react-nouislider": "~1.6.0",
-    "react-masonry-component": "~2.0.0"
+    "react-masonry-component": "~2.0.0",
+    "c3": "~0.4.11-rc4"
   },
   "devDependencies": {
     "autoprefixer": "^6.0.0",
