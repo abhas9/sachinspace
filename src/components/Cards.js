@@ -1,6 +1,8 @@
 import React from 'react';
 import Card from './Card.js';
+import MasonryComponent from 'react-masonry-component';
 
+let Masonry = MasonryComponent(React);
 
 export default React.createClass({
   render() {
@@ -8,11 +10,16 @@ export default React.createClass({
   	for (let i = 0; i < this.props.data.length; i++) {
   		cards.push(<Card key = {i} {...this.props.data[i]} />)
   	}
+  	let  masonryOptions = {
+		    transitionDuration: 0
+		};
     return (
-      <div>
+      <Masonry className={'cards'} 
+                elementType={'div'} 
+                options={masonryOptions} 
+                disableImagesLoaded={false}>
           {cards}
-          <div style = {{clear: 'both'}}></div>
-      </div>
+      </Masonry>
     )
   }
 });

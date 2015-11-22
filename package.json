@@ -27,7 +27,8 @@
     "react-router": "^1.0.0",
     "lodash": "~3.10.1",
     "react-select": "~1.0.0-beta5",
-    "react-nouislider": "~1.6.0"
+    "react-nouislider": "~1.6.0",
+    "react-masonry-component": "~2.0.0"
   },
   "devDependencies": {
     "autoprefixer": "^6.0.0",
