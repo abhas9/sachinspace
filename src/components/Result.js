@@ -1,6 +1,7 @@
 import React from 'react';
 import masterdata from '../store/masterdata.js';
-
+import resultsConfig from '../config/results.js';
+import _ from 'lodash';
 
 export default React.createClass({
 	getInitialState() {
@@ -33,10 +34,46 @@ export default React.createClass({
     	}
     	return data;
     },
+
+    getSummary(data, type) {
+    	let summary = [];
+    	
+    	for (let i = 0; i < resultsConfig.length; i++) {
+    		let count = data.filter(function(d) {
+    			return typeof d[resultsConfig[i].key] !== "undefined";
+    		}).length;
+    		if (resultsConfig[i].type === 'count' && type === 'total') {
+    			let sum = _.sum(data, resultsConfig[i].key);
+    			summary.push({title: resultsConfig[i].title, value: sum});
+    		} else if (resultsConfig[i].type === 'count' && type === 'average') {
+    			let sum = _.sum(data, resultsConfig[i].key);
+    			
+    			let average = sum/count;
+    			summary.push({title: resultsConfig[i].title, value: average});
+    		} else if (resultsConfig[i].type === 'group') {
+    			let grouped = _.groupBy(data, resultsConfig[i].key);
+    			debugger;
+				let value = {};
+				for (let group in grouped) {
+					if (grouped.hasOwnProperty(group)) {
+						if (type === 'total') {
+							value[group] = grouped[group].length;
+						} else if (type === 'average'){
+							value[group] = (grouped[group].length/count) * 100;
+						}
+					}
+				}
+				summary.push({title: resultsConfig[i].title, value: value});
+    		}
+    	}
+    	return summary;
+    },
     render() {
     	let data = this.getFilteredData();
+    	let summary = this.getSummary(data, 'average');
         return (
         <div>
+      		{JSON.stringify(summary)}
       		{JSON.stringify(data)}
   		</div>
         )

@@ -19,7 +19,7 @@ export default [{
     type: 'multiselect',
     optional: false
 }, {
-    key: 'result',
+    key: 'match_result',
     title: 'Result',
     type: 'multiselect',
     optional: false
