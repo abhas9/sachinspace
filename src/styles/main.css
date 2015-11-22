@@ -100,3 +100,6 @@ button {
 .results-visualization-wrp {
 	margin-top: 50px;
 }
+.card table.values td, .card table.summary-table td{
+	text-transform: capitalize;
+}

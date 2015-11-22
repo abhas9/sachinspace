@@ -1,6 +1,6 @@
 export default [{
     key: 'match_result',
-    title: 'Result',
+    title: 'Match Results',
     type: 'group'
 }, {
     key: 'batting_score',

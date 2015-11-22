@@ -2,6 +2,8 @@ import React from 'react';
 import masterdata from '../store/masterdata.js';
 import resultsConfig from '../config/results.js';
 import _ from 'lodash';
+import Cards from './Cards.js';
+
 
 export default React.createClass({
     getInitialState() {
@@ -52,7 +54,7 @@ export default React.createClass({
                 } else if (resultsConfig[i].type === 'count' && type === 'average') {
                     let sum = _.sum(data, resultsConfig[i].key);
 
-                    let average = sum / count;
+                    let average = Math.round((sum * 100) / count) / 100;
                     summary.push({
                         title: resultsConfig[i].title,
                         value: average
@@ -65,7 +67,8 @@ export default React.createClass({
                             if (type === 'total') {
                                 value[group] = grouped[group].length;
                             } else if (type === 'average') {
-                                value[group] = (grouped[group].length / count) * 100;
+                                value[group] = (Math.round((grouped[group].length / count) * 10000) / 100 )+ '%';
+
                             }
                         }
                     }
@@ -107,8 +110,11 @@ export default React.createClass({
 	            <div className = 'results-wrp'>
 		            
 		        	<div className = 'results-visualization-wrp'>
-		      			<pre>{JSON.stringify(summary, null, 2)}</pre>
-		      			<pre>{JSON.stringify(data,null, 2)}</pre>
+                        <h4>Summary</h4>
+                        <Cards data = {summary} />
+                        <hr />
+                        <h4>Search Results</h4>
+                        <Cards data = {data} />
 		      		</div>
 	  			</div>
   			</div>
