@@ -7,8 +7,9 @@ export default React.createClass({
   render() {
     return (
       <div>
-          <Filter propname='opposition' type='multiselect' title='Vs' optional='false' />
-          <Filter propname='ground' type='multiselect' title='Ground' optional='false' />
+          <Filter propname='opposition' type='multiselect' title='Vs' optional={false} />
+          <Filter propname='ground' type='multiselect' title='Ground' optional={true} />
+          <Filter propname='batting_score' type='range' title='Ground' optional={true} />
 
           <Result />
           <h1>Hello Master Blaster</h1>

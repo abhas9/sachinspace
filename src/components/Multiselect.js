@@ -11,8 +11,13 @@ export default React.createClass({
                     label: o[this.props.propname]
                 };
             }), o => o.value.toLowerCase());
+            let initialValue = this.options.map(o => o.value).join(",");
+            let filterEventDetailsObj = this.filterEventDetails(initialValue, !this.props.optional);
+            let event = new CustomEvent('filterChange', filterEventDetailsObj);
+            document.dispatchEvent(event);
             return {
-                value: this.options.map(o => o.value).join(",")
+                value: initialValue,
+                disabled: this.props.optional
             };
         },
         componentWillMount() {
@@ -23,37 +28,59 @@ export default React.createClass({
 
         },
 
-        logChange(val) {
-            console.log("Selected: ", val);
-            this.setState({
-                value: val
+        selectChangeHandler(val) {
+            val = val.map(function(v) {
+                return v.value
             });
+            this.setState(prevState => {
+                prevState.value = val;
+                return prevState;
+            });
+            let filterEventDetailsObj = this.filterEventDetails(val, true);
+            let event = new CustomEvent('filterChange', filterEventDetailsObj);
+            document.dispatchEvent(event);
+        },
+
+        filterEventDetails(val, enabled) {
             let component = this;
-            let event = new CustomEvent('filterChange', {
+            return {
                 detail: {
                     propName: component.props.propname,
+                    enabled: enabled,
                     filterFunction: function(data) {
-                        let values = val.map(function(v) {
-                            return v.value
-                        });
                         return data.filter(function(d) {
-                            return values.indexOf(d[component.props.propname]) >= 0;
+                            return val.indexOf(d[component.props.propname]) >= 0;
                         });
                     }
                 }
+            };
+        },
+
+        toggleFilter(e) {
+            this.setState(prevState => {
+                prevState.disabled = !e.target.checked;
+                return prevState;
             });
+            let filterEventDetailsObj = this.filterEventDetails(this.state.value, e.target.checked);
+            let event = new CustomEvent('filterChange', filterEventDetailsObj);
             document.dispatchEvent(event);
         },
 
         render() {
-
+            let filterSwitch = "";
+            if (this.props.optional) {
+                filterSwitch = <input type="checkbox" name="filterState" checked={!this.state.disabled} onChange={this.toggleFilter} />
+            }
             return (
-                <Select
-            name="form-field-name"
-            value={this.state.value}
-            multi={true}
-            options={this.options}
-            onChange={this.logChange} />
-            );
+                <div>
+                    {filterSwitch}
+                    <Select
+                    name="form-field-name"
+                    value={this.state.value}
+                    multi={true}
+                    options={this.options}
+                    onChange={this.selectChangeHandler} 
+                    disabled={this.state.disabled}/>
+                </div>);
         }
 });

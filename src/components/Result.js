@@ -14,15 +14,21 @@ export default React.createClass({
     filterChangeHandler(e) {
         console.log(e);
         this.setState(prevState => {
-        	prevState.filters[e.detail.propName] = e.detail.filterFunction;
-        	return prevState;
+        	prevState.filters[e.detail.propName] = {
+    			filterFunction: e.detail.filterFunction,
+    			enabled: e.detail.enabled
+    		}
+    		return prevState;
         });
     },
+
     getFilteredData() {
     	let data = masterdata;
     	for (let filter in this.state.filters) {
     		if (this.state.filters.hasOwnProperty(filter)) {
-    			data = this.state.filters[filter](data);
+    			if (this.state.filters[filter].enabled) {
+    				data = this.state.filters[filter].filterFunction(data);
+    			}
     		}
     	}
     	return data;

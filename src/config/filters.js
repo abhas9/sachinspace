@@ -24,7 +24,7 @@ export default [{
     type: 'multiselect',
     optional: false
 }, {
-    key: 'score',
+    key: 'batting_score',
     title: 'Score',
     type: 'range',
     optional: true
