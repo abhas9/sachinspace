@@ -20,22 +20,49 @@ export default React.createClass({
   },
   renderChart() {
     let data = [];
-    if (visualizationConfig.time.indexOf(this.state.key) < 0 && true) {
-      let grouped = _.groupBy(this.props.data, this.state.key);
-      let groups = Object.keys(grouped);
-      
-      for (let i = 0; i < groups.length; i++) {
+    let grouped = {};
+    if (visualizationConfig.time.indexOf(this.state.key) < 0) {
+      grouped = _.groupBy(this.props.data, this.state.key);
+    } else {
+      let max = _.max(this.props.data, d => {
+        if (!d.hasOwnProperty(this.state.key)) return -Infinity;
+        return new Date(d[this.state.key]).getTime();
+      });
+      let min = _.min(this.props.data, d => {
+        if (!d.hasOwnProperty(this.state.key)) return Infinity;
+        return new Date(d[this.state.key]).getTime();
+      });
+      let groupByTime = '';
+      let dateDiff = new Date(max[this.state.key]).getTime() - new Date(min[this.state.key]).getTime();
+      if (dateDiff >= 94694400000) { // more than 3 years
+        groupByTime = 'year';
+      } else if (dateDiff >= 2592000000){
+        groupByTime = 'month';
+      } else {
+        groupByTime = 'day';
+      }
+      grouped = _.groupBy(this.props.data, o => {
+        let date = new Date(o[this.state.key]);
+        let months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct',
+                    'Nov', 'Dec'];
+        if (groupByTime === 'year') {
+          return date.getFullYear();
+        } else if (groupByTime === 'month'){
+          return date.getFullYear() + ',' + months[date.getMonth()];
+        } else {
+          return date.getFullYear() + ',' + months[date.getMonth()] + ',' + date.getDate();
+        }
+      });
+    }
+    let groups = Object.keys(grouped);
+
+    for (let i = 0; i < groups.length; i++) {
         let o = {};
         o[this.state.key] = groups[i];
         for (let j = 0; j <visualizationConfig.matrix.length; j++) {
           o[visualizationConfig.matrix[j]] = _.sum(grouped[groups[i]],visualizationConfig.matrix[j]);
         }
         data.push(o)
-      }
-    } else {
-      let grouped = _.groupBy(this.props.data, o => {
-        if (this.data.length) {}
-      });
     }
 
     c3.generate({
