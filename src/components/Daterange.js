@@ -78,13 +78,22 @@ export default React.createClass({
         },
 
         render() {
-            let filterSwitch = '';
+            let filterSwitchAndLabel = '';
+            let labelClass = (this.props.title.indexOf(' ') > 0) ? ' small-label' : ''; 
             if (this.props.optional) {
-                filterSwitch =
-                    <input type='checkbox' name='filterState' checked={!this.state.disabled} onChange={this.toggleFilter} />
+                filterSwitchAndLabel =
+                    <div className = 'checkbox-wrp'>
+                        <input type = 'checkbox' id = {this.props.propname + 'Checkbox'} name = 'filterState' checked = {!this.state.disabled} onChange={this.toggleFilter} />
+                        <label htmlFor={this.props.propname + 'Checkbox'} className = {'checkbox-label' + labelClass}>{this.props.title}</label>
+                    </div>;
+            }   else {
+                filterSwitchAndLabel = <label style = {{float: 'left', width:'50px'}} className = {'range-label' + labelClass}>{this.props.title}</label>;
             }
             let style = {
-                display: (this.state.disabled) ? 'none' : 'block'
+                display: (this.state.disabled) ? 'none' : 'block',
+                width: '94%',
+                float: 'right',
+                padding: '10px'
             };
             let component = this;
 
@@ -100,9 +109,9 @@ export default React.createClass({
                 return time;
             }
             return (
-                <div>
-                    {filterSwitch}
-                    <div style = {style}>
+                <div className = 'filter-wrp daterange' style = {{width:'100%'}}>
+                    {filterSwitchAndLabel}
+                    <div className = 'daterange-wrp' style = {style}>
                         <Nouislider 
                             range = {{
                                         min: this.timestamp(this.min),
@@ -110,10 +119,12 @@ export default React.createClass({
                                     }}
                             step = {30 * 24 * 60 * 60 * 1000}
                             start = { this.state.start }
+                            connect = {true}
                             onChange = { this.rangeChangeHandler }
                             disabled={ this.state.disabled }
                             tooltips = {{ format : formatDate }}/>
                     </div>
+                    <div style = {{clear: 'both'}}></div>
                 </div>
             );
         }

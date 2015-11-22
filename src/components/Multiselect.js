@@ -67,13 +67,20 @@ export default React.createClass({
         },
 
         render() {
-            let filterSwitch = "";
+            let filterSwitchAndLabel = '';
+            let labelClass = (this.props.title.indexOf(' ') > 0) ? ' small-label' : ''; 
             if (this.props.optional) {
-                filterSwitch = <input type="checkbox" name="filterState" checked={!this.state.disabled} onChange={this.toggleFilter} />
+                filterSwitchAndLabel =
+                    <div className = 'checkbox-wrp'>
+                        <input type = 'checkbox' id = {this.props.propname + 'Checkbox'} name = 'filterState' checked = {!this.state.disabled} onChange={this.toggleFilter} />
+                        <label htmlFor={this.props.propname + 'Checkbox'} className = {'checkbox-label' + labelClass}>{this.props.title}</label>
+                    </div>;
+            }   else {
+                filterSwitchAndLabel = <label className = {'select-label' + labelClass}>{this.props.title}</label>;
             }
             return (
-                <div>
-                    {filterSwitch}
+                <div className = 'filter-wrp multiselect'>
+                    {filterSwitchAndLabel}
                     <Select
                     name="form-field-name"
                     value={this.state.value}

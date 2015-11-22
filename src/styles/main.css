@@ -1,0 +1,67 @@
+input[type=checkbox] {
+    position: absolute;
+    z-index: -1000;
+    left: -1000px;
+    overflow: hidden;
+    clip: rect(0 0 0 0);
+    height: 1px;
+    width: 1px;
+    margin: -1px;
+    padding: 0;
+    border: 0;
+}
+
+input[type=checkbox] + label.checkbox-label {
+    padding-left: 27px;
+    height: 22px;
+    display: inline-block;
+    line-height: 22px;
+    background-repeat: no-repeat;
+    background-position: 0 0;
+    font-size: 20px;
+    vertical-align: middle;
+    cursor: pointer;
+}
+
+input[type=checkbox] + label.checkbox-label.small-label {
+	font-size: 11px;
+    line-height: 11px;
+}
+
+input[type=checkbox]:checked + label.checkbox-label {
+    background-position: 0 -22px;
+}
+
+label.checkbox-label {
+    background-image: url(../images/checkbox.png);
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+.daterange-wrp .noUi-tooltip {
+    width: 100px;
+    left: -37px;
+}
+
+label {
+    font-weight: 200;
+    font-size: 18px;
+    line-height: 22px;
+}
+
+label.small-label {
+    font-size: 11px;
+    line-height: 11px;
+}
+
+.filter-wrp {
+	margin-top: 10px;
+}
+
+.filter-wrp.daterange {
+	margin-top: 35px;
+}

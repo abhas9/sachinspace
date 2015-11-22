@@ -59,7 +59,6 @@ export default React.createClass({
                     });
                 } else if (resultsConfig[i].type === 'group') {
                     let grouped = _.groupBy(data, resultsConfig[i].key);
-                    debugger;
                     let value = {};
                     for (let group in grouped) {
                         if (grouped.hasOwnProperty(group)) {
@@ -84,23 +83,27 @@ export default React.createClass({
             let summary = this.getSummary(data, this.state.view);
             let component = this;
             return (
-                <div>
-        	<button className={this.state.view === 'total'? 'button-primary' : ''}
-        			onClick={function(){
-        				component.setState(prevState => {
-        					prevState.view = 'total';
-        					return prevState;
-        				})
-        			}
-        		} >Total</button>
-        	<button className={this.state.view === 'average'? 'button-primary' : ''}
-        			onClick={function(){
-        				component.setState(prevState => {
-        					prevState.view = 'average';
-        					return prevState;
-        				})
-        			}
-        		}>Average</button>
+            <div className = 'results-wrp'>
+	            <div className = 'view-buttons-wrp'>
+		        	<button className = {this.state.view === 'total'? 'button-primary' : ''}
+		        			onClick={function(){
+		        				component.setState(prevState => {
+		        					prevState.view = 'total';
+		        					return prevState;
+		        				})
+		        			}
+		        		} >Total</button>
+		        	<button className = {this.state.view === 'average'? 'button-primary' : ''}
+		        			onClick = {function(){
+		        				component.setState(prevState => {
+		        					prevState.view = 'average';
+		        					return prevState;
+		        				})
+		        			}
+		        		}
+		        		style ={{marginLeft: '10px'}}
+		        		>Average</button>
+	        	</div>
       		<pre>{JSON.stringify(summary, null, 2)}</pre>
       		<pre>{JSON.stringify(data,null, 2)}</pre>
   		</div>

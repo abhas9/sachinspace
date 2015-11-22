@@ -1,6 +1,6 @@
 export default [{
     key: 'opposition',
-    title: 'Vs',
+    title: 'Opposition',
     type: 'multiselect',
     optional: false
 }, {

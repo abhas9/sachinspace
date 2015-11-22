@@ -69,26 +69,41 @@ export default React.createClass({
         },
 
         render() {
-            let filterSwitch = '';
+            let filterSwitchAndLabel = '';
+            let labelClass = (this.props.title.indexOf(' ') > 0) ? ' small-label' : ''; 
+
             if (this.props.optional) {
-                filterSwitch = <input type='checkbox' name='filterState' checked={!this.state.disabled} onChange={this.toggleFilter} />
+                filterSwitchAndLabel =
+                    <div className = 'checkbox-wrp' style = {{float: 'left', width:'100px'}}>
+                        <input type = 'checkbox' id = {this.props.propname + 'Checkbox'} name = 'filterState' checked = {!this.state.disabled} onChange={this.toggleFilter} />
+                        <label htmlFor={this.props.propname + 'Checkbox'} className = {'checkbox-label' + labelClass}>{this.props.title}</label>
+                    </div>;
+            }   else {
+                filterSwitchAndLabel = <label style = {{float: 'left', width:'50px'}} className = {'range-label' + labelClass}>{this.props.title}</label>;
             }
-            let style = {display: (this.state.disabled) ? 'none' : 'block'};
+            let style = {
+                display: (this.state.disabled) ? 'none' : 'block',
+                width: '90%',
+                float: 'right',
+                padding: '10px'
+            };
             return ( 
-                <div>
-                    {filterSwitch}
+                <div className = 'filter-wrp range' style = {{width:'100%'}}>
+                    {filterSwitchAndLabel}
                     <div style = {style}>
                         <Nouislider 
                             range = {{
                                         min: this.min,
                                         max: this.max
                                     }}
+                            connect = {true}
                             step = {1}
                             start = {this.state.start}
                             onChange = {this.rangeChangeHandler}
                             disabled={this.state.disabled}
                             tooltips/>
                     </div>
+                    <div style = {{clear: 'both'}}></div>
                 </div>
             );
         }
