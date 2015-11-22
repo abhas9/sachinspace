@@ -73,8 +73,8 @@ export default React.createClass({
     	let summary = this.getSummary(data, 'average');
         return (
         <div>
-      		{JSON.stringify(summary)}
-      		{JSON.stringify(data)}
+      		<pre>{JSON.stringify(summary, null, 2)}</pre>
+      		<pre>{JSON.stringify(data,null, 2)}</pre>
   		</div>
         )
     }

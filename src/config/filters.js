@@ -48,9 +48,9 @@ export default [{
     title: 'Result margin (runs)',
     type: 'range',
     optional: true
-}, {
+} /*,{
     key: 'not_out',
     title: 'Not Out',
     type: 'boolean',
     optional: true
-}];
+}*/];
