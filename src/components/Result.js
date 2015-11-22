@@ -83,30 +83,35 @@ export default React.createClass({
             let summary = this.getSummary(data, this.state.view);
             let component = this;
             return (
-            <div className = 'results-wrp'>
+            <div className = 'results-outer'>
 	            <div className = 'view-buttons-wrp'>
-		        	<button className = {this.state.view === 'total'? 'button-primary' : ''}
-		        			onClick={function(){
-		        				component.setState(prevState => {
-		        					prevState.view = 'total';
-		        					return prevState;
-		        				})
-		        			}
-		        		} >Total</button>
-		        	<button className = {this.state.view === 'average'? 'button-primary' : ''}
-		        			onClick = {function(){
-		        				component.setState(prevState => {
-		        					prevState.view = 'average';
-		        					return prevState;
-		        				})
-		        			}
-		        		}
-		        		style ={{marginLeft: '10px'}}
-		        		>Average</button>
-	        	</div>
-      		<pre>{JSON.stringify(summary, null, 2)}</pre>
-      		<pre>{JSON.stringify(data,null, 2)}</pre>
-  		</div>
+			        	<button className = {this.state.view === 'total'? 'button-primary' : ''}
+			        			onClick={function(){
+			        				component.setState(prevState => {
+			        					prevState.view = 'total';
+			        					return prevState;
+			        				})
+			        			}
+			        		} >Total</button>
+			        	<button className = {this.state.view === 'average'? 'button-primary' : ''}
+			        			onClick = {function(){
+			        				component.setState(prevState => {
+			        					prevState.view = 'average';
+			        					return prevState;
+			        				})
+			        			}
+			        		}
+			        		style ={{marginLeft: '10px'}}
+			        		>Average</button>
+		        </div>
+	            <div className = 'results-wrp'>
+		            
+		        	<div className = 'results-visualization-wrp'>
+		      			<pre>{JSON.stringify(summary, null, 2)}</pre>
+		      			<pre>{JSON.stringify(data,null, 2)}</pre>
+		      		</div>
+	  			</div>
+  			</div>
             )
         }
 });

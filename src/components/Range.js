@@ -70,22 +70,22 @@ export default React.createClass({
 
         render() {
             let filterSwitchAndLabel = '';
-            let labelClass = (this.props.title.indexOf(' ') > 0) ? ' small-label' : ''; 
+            let labelClass = (this.props.title.split(' ').length > 3) ? ' small-label' : ''; 
 
             if (this.props.optional) {
                 filterSwitchAndLabel =
-                    <div className = 'checkbox-wrp' style = {{float: 'left', width:'100px'}}>
+                    <div className = 'checkbox-wrp'>
                         <input type = 'checkbox' id = {this.props.propname + 'Checkbox'} name = 'filterState' checked = {!this.state.disabled} onChange={this.toggleFilter} />
                         <label htmlFor={this.props.propname + 'Checkbox'} className = {'checkbox-label' + labelClass}>{this.props.title}</label>
                     </div>;
             }   else {
-                filterSwitchAndLabel = <label style = {{float: 'left', width:'50px'}} className = {'range-label' + labelClass}>{this.props.title}</label>;
+                filterSwitchAndLabel = <label className = {'range-label' + labelClass}>{this.props.title}</label>;
             }
             let style = {
                 display: (this.state.disabled) ? 'none' : 'block',
-                width: '90%',
-                float: 'right',
-                padding: '10px'
+                width: '75%',
+                padding: '10px',
+                margin: '30px auto'
             };
             return ( 
                 <div className = 'filter-wrp range' style = {{width:'100%'}}>

@@ -5,14 +5,14 @@ export default [{
     optional: false
 }, {
     key: 'date',
-    title: 'Time',
+    title: 'Date',
     type: 'daterange',
     optional: false
 }, {
     key: 'ground',
     title: 'Ground',
     type: 'multiselect',
-    optional: false
+    optional: true
 }, {
     key: 'toss',
     title: 'Toss',

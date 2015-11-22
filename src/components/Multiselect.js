@@ -68,6 +68,9 @@ export default React.createClass({
 
         render() {
             let filterSwitchAndLabel = '';
+            let style = {
+                display: (this.state.disabled) ? 'none' : 'block',
+            };
             let labelClass = (this.props.title.indexOf(' ') > 0) ? ' small-label' : ''; 
             if (this.props.optional) {
                 filterSwitchAndLabel =
@@ -81,13 +84,15 @@ export default React.createClass({
             return (
                 <div className = 'filter-wrp multiselect'>
                     {filterSwitchAndLabel}
-                    <Select
-                    name="form-field-name"
-                    value={this.state.value}
-                    multi={true}
-                    options={this.options}
-                    onChange={this.selectChangeHandler} 
-                    disabled={this.state.disabled}/>
+                    <div style = {style}>
+                        <Select
+                        name="form-field-name"
+                        value={this.state.value}
+                        multi={true}
+                        options={this.options}
+                        onChange={this.selectChangeHandler} 
+                        disabled={this.state.disabled}/>
+                    </div>
                 </div>);
         }
 });

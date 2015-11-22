@@ -87,13 +87,13 @@ export default React.createClass({
                         <label htmlFor={this.props.propname + 'Checkbox'} className = {'checkbox-label' + labelClass}>{this.props.title}</label>
                     </div>;
             }   else {
-                filterSwitchAndLabel = <label style = {{float: 'left', width:'50px'}} className = {'range-label' + labelClass}>{this.props.title}</label>;
+                filterSwitchAndLabel = <label className = {'range-label' + labelClass}>{this.props.title}</label>;
             }
             let style = {
                 display: (this.state.disabled) ? 'none' : 'block',
-                width: '94%',
-                float: 'right',
-                padding: '10px'
+                width: '72%',
+                padding: '10px',
+                margin: '32px auto'
             };
             let component = this;
 

@@ -1,3 +1,6 @@
+body {
+	overflow: hidden; 
+}
 input[type=checkbox] {
     position: absolute;
     z-index: -1000;
@@ -62,6 +65,38 @@ label.small-label {
 	margin-top: 10px;
 }
 
-.filter-wrp.daterange {
-	margin-top: 35px;
+.filters-wrp {
+	width: 25%;
+	position: absolute;
+	top:0%;
+	bottom: 0%;
+	overflow-y: auto;
+	background: #F9F9F9;
+	border-right: 1px solid #EEE;
+	padding: 5px 15px;
+	left: 0px;
+}
+.results-wrp {
+	left:26%;
+	right:0%;
+	top:0%;
+	bottom: 0%;
+	padding: 5px 25px;
+	position: absolute;
+	overflow-y: auto; 
+}
+button {
+	background: #fff;
+}
+.view-buttons-wrp {
+	position: fixed;
+	top: 0px;
+	padding: 5px;
+	left: 28%;
+	background: #fff;
+	overflow: hidden;
+	z-index:2;
+}
+.results-visualization-wrp {
+	margin-top: 50px;
 }

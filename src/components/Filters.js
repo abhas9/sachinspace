@@ -14,7 +14,7 @@ export default React.createClass({
                     optional={filtersConfig[i].optional} />);
     }
     return (
-      <div>
+      <div className = 'filters-wrp'>
           {filters}
       </div>
     )
