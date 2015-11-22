@@ -113,7 +113,7 @@ export default React.createClass({
                         <h4>Summary</h4>
                         <Cards data = {summary} />
                         <hr />
-                        <Visualization data = {data} id = 'summary-chart'/>
+                        <Visualization data = {data} id = 'summary-chart' view = {this.state.view}/>
                         <h4>Search Results</h4>
                         <Cards data = {data} />
 
