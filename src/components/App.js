@@ -10,6 +10,8 @@ export default React.createClass({
           <Filter propname='opposition' type='multiselect' title='Vs' optional={false} />
           <Filter propname='ground' type='multiselect' title='Ground' optional={true} />
           <Filter propname='batting_score' type='range' title='Ground' optional={true} />
+          <Filter propname='date' type='daterange' title='Ground' optional={false} />
+
 
           <Result />
           <h1>Hello Master Blaster</h1>
