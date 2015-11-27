@@ -59,10 +59,16 @@ export default React.createClass({
     for (let i = 0; i < groups.length; i++) {
         let o = {};
         o[this.state.key] = groups[i];
-        for (let j = 0; j <visualizationConfig.matrix.length; j++) {          
-          o[visualizationConfig.matrix[j]] = _.sum(grouped[groups[i]],visualizationConfig.matrix[j]);
-          if (this.props.view === 'average') {
+        for (let j = 0; j <visualizationConfig.matrix.length; j++) {    
+          if (this.props.view === 'total') {  
+            o[visualizationConfig.matrix[j]] = _.sum(grouped[groups[i]],visualizationConfig.matrix[j]);
+          } else if (this.props.view === 'average') {
+            o[visualizationConfig.matrix[j]] = _.sum(grouped[groups[i]],visualizationConfig.matrix[j]);
             o[visualizationConfig.matrix[j]] = Math.round(o[visualizationConfig.matrix[j]] * 100 / grouped[groups[i]].length) / 100;
+          } else if (this.props.view === 'maximum') {
+            o[visualizationConfig.matrix[j]] = _.max(grouped[groups[i]],visualizationConfig.matrix[j])[visualizationConfig.matrix[j]];
+          } else if (this.props.view === 'minimum') {
+            o[visualizationConfig.matrix[j]] = _.min(grouped[groups[i]],visualizationConfig.matrix[j])[visualizationConfig.matrix[j]]; 
           }
         }
         data.push(o)

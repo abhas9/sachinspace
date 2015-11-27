@@ -4,6 +4,8 @@ import resultsConfig from '../config/results.js';
 import _ from 'lodash';
 import Cards from './Cards.js';
 import Visualization from './Visualization.js';
+import views from '../config/views.js';
+import ViewButtons from './ViewButtons.js';
 
 export default React.createClass({
     getInitialState() {
@@ -37,19 +39,31 @@ export default React.createClass({
             }
             return data;
         },
-
+        updateView(view) {
+            this.setState(prevState => {
+                prevState.view = view;
+                return prevState;
+            });
+        },
         getSummary(data, type) {
             let summary = [];
-
             for (let i = 0; i < resultsConfig.length; i++) {
                 let count = data.filter(function(d) {
                     return typeof d[resultsConfig[i].key] !== "undefined";
                 }).length;
+                let maxOrMin = ['maximum', 'minimum'];
+                let maxOrMinFunction = ['max', 'min'];
                 if (resultsConfig[i].type === 'count' && type === 'total') {
-                    let sum = _.sum(data, resultsConfig[i].key);
+                     let sum = _.sum(data, resultsConfig[i].key);
                     summary.push({
                         title: resultsConfig[i].title,
                         value: sum
+                    });
+                } else if (resultsConfig[i].type === 'count' && maxOrMin.indexOf(type) >= 0) {
+                    let value = _[maxOrMinFunction[maxOrMin.indexOf(type)]](data, resultsConfig[i].key);
+                    summary.push({
+                        title: resultsConfig[i].title,
+                        value: value[resultsConfig[i].key]
                     });
                 } else if (resultsConfig[i].type === 'count' && type === 'average') {
                     let sum = _.sum(data, resultsConfig[i].key);
@@ -68,14 +82,15 @@ export default React.createClass({
                                 value[group] = grouped[group].length;
                             } else if (type === 'average') {
                                 value[group] = (Math.round((grouped[group].length / count) * 10000) / 100 )+ '%';
-
-                            }
+                            } 
                         }
                     }
-                    summary.push({
-                        title: resultsConfig[i].title,
-                        value: value
-                    });
+                    if (Object.getOwnPropertyNames(value).length > 0) {
+                        summary.push({
+                            title: resultsConfig[i].title,
+                            value: value
+                        });
+                    }
                 }
             }
             return summary;
@@ -87,26 +102,7 @@ export default React.createClass({
             let component = this;
             return (
             <div className = 'results-outer'>
-	            <div className = 'view-buttons-wrp'>
-			        	<button className = {this.state.view === 'total'? 'button-primary' : ''}
-			        			onClick={function(){
-			        				component.setState(prevState => {
-			        					prevState.view = 'total';
-			        					return prevState;
-			        				})
-			        			}
-			        		} >Total</button>
-			        	<button className = {this.state.view === 'average'? 'button-primary' : ''}
-			        			onClick = {function(){
-			        				component.setState(prevState => {
-			        					prevState.view = 'average';
-			        					return prevState;
-			        				})
-			        			}
-			        		}
-			        		style ={{marginLeft: '10px'}}
-			        		>Average</button>
-		        </div>
+	            <ViewButtons view = {this.state.view} views = {views} onClick = {this.updateView} />
 	            <div className = 'results-wrp'>
 		            
 		        	<div className = 'results-visualization-wrp'>
